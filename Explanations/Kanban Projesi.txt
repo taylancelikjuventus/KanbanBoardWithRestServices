@@ -1,0 +1,111 @@
+
+KANBAN PROJESİ 
+
+-Verilen linkteki UI a benzer bir UI oluşturuldu.
+-Projenin amacı belli başlı kullanıcılara ait işlerin statülerini takip edebilmek ve
+ onları güncelleyebilmektir ve gerektiğinde yeni projeler ekleyip eskilerini 
+ silebilmektir.
+
+///////////////////////////////DATABASE///////////////////////////////////
+-Projede sunulan "kanbas_db.sql" isimli database dosyası hazırlandı.Database sadece
+ "Users" ve "Tasks" tablolarından oluşmaktadır.Tabloların ilişkisel detayları ilgili klasörde
+ gösterilmiştir.
+
+-User-Task ilişkili bir database oluşturuldu.Her bir User id adresini girerek
+ kendine ait Task'lerini statüleriyle (backlog,ToDo vs...) görebilmektedir.
+
+////////////////////////////////COMPONENTS/////////////////////////////////
+-Projede anlatılana göre 2 temel Class Card ve List oluşturuldu. Board için
+ extra bir class oluşturulmadı çünkü proje kapsamına göre daha basit bir yol izlendi.
+ Fakat Board componenti List ve Card ları tutacak şekilde ve üstünde Userid ve username'leri
+ gösterecek şekilde ayarlandı.
+
+-Board içine List objeleri render edildi ve List içine de Card objeleri render edildi.
+ Card ve List Componentlerine ilgili "event listener" lar eklendi.
+
+-Card objesine ait "cardid", "title","text","deadline" dataları database tablosu "Tasks" in     sırasıyla taskid,taskname,tasktext ve deadline kolonlarından gelen dataları göstermektedir.
+ List objesine ait "listname"  database tablosu "Tasks" in 
+ taskstatus kolonuna(VARCHAR olarak "backlog","inProgress","todo","done" olabilir)  
+ ,"cards" oluşturulan Card objelerini tutan array'e ve "id" ise kendi belirlediğimiz
+ ("list1","list2","list3" ve "list4") olabilir.
+
+ Böylelikle DOM üzerinde "list1" id'li element "backlog" statülü tasklari tutacaktir ve herbir
+ task'in id si de DOM üerindeki Card objesinin "id" attribute u olarak tutulacaktir.
+
+ Sonuçta Card objesine "click" listener ekleyip üzerine tıkladıgımızda onun parent nodu u
+ nun id'si hangi listeye ait olduğunu , kendi id'si de hangi Card'a tıklamış
+ oldugumuzu gösterecektir.
+
+//////////////////////////////////////DRAG-DROP///////////////////////////////////////// 
+ Drag-Drop eventleri proje klasörünün "public/dragdrops.js" dosyasında implemente edildi.
+ Kısaca hem Card objelerine hem de List objeleri için "ondragover" eventi aktive edildi.
+ Yani herhangi bir listeden bir kartı drag ettiğimizde onu drop yapabileceğimiz 
+ 3 alan vardır.
+  1.Birisi kendi listesinin içindeki herhangi bir boş alan
+  2.Kendi listesi içindeki başka bir kartın üstü
+  3.Komşu listelerden herhangi birinin üzerindeki boş alan(yani Card ın render edilmediği kısımlar)
+  4.Komşu liste üzerindeki başka Cardların üstü.
+ Bu ihtimaller düşünülerek indirgeme yaptığımızda sonuçta Drag yapılan Card ın listesine     bakılmaksızın onun ya başka bir Card ın üstüne ya da başka bir List in üstüne bırakılacağı
+ bilinmektedir.
+ Eğer Card başka bir Card ın üstüne bırakılacaksa üstüne bırakıldığı Card ın hemen altına
+ render edilecektir.
+ Eğer Card komşu Listelere bırakılırsa daima en alt sırada görünecektir.Ancak daha sonra kendi
+ listesi içinde sırası degiştirilebilecektir.
+  
+ Alternatif olarak Liste içinde Cardları koyabilmek için görünmez Drop Zone'lar yapılıp sadece
+ Bu Drop Zone 'lar için "ondragover" listener ı eklenebilirdi.(Desktop programlarındaki gibi) 
+
+ Ayrıca drag-drop esnasında yapılacak her değişiklik rest api ları vasıtasyla database tablosunda
+ güncellenmektedir.Böylece kullanıcı browser ı kapatıp tekrar açsa bile son yaptığı değişiklikleri 
+ görebilecektir.
+
+////////////////////////////////REST API////////////////////////////////////
+ -Rest API Node.js ve Express framework ü kullanılarak hazırlandı. Proje klasörü içersinde
+  "server.js" dosyası içinde yapılan route'lar vardır.Toplamda 12 tane endpoint hazırlandı
+  User ve Task tabloları üzerinde CRUD yapabilmek için.Ayrıca index sayfası ve
+  kanban board içinde iki ayrı endpoint eklendi.
+
+ -Bütün sayfalar html formatında render edildi ve bunu için gerekli olan eklentiler
+  npm ile indirilerek proje klasörü içersindeki "express_modules/node_modules"
+  klasörüne eklenmiştir.(ejs vs gibi)
+
+ -Rest API lar "Postman" programıyla test edilmiştir ve hepsi sorunsuz çalışmaktadır.
+  Bütün sorgular ve sonuçlar "postman collection" biçminde Proje Klasörüne         "kanbas_rest_api_new.postman_collection.json" dosyası olarak eklenmiştir.
+  
+ -Projenin kapsamı gereği tüm api'ler kullanılmamış sadece gerekli olanlar program içinde
+  kullanılmıştır.Bu api'leri kullanabilmek için gerekli JS fonksiyonları ise proje klasöründeki
+  "public/apifunctions.js" dosyasına eklenmiştir.
+
+ -Bütün servisler tek dosya altına toplanmıştır yani "server.js" te hem User ile ilgili
+  hem de "Task" ile ilgili endpoint ler bulunmaktadır.Ancak servisler "UserServices" ve
+  "TaskServices" olarakta iki ayrı dosyaya da ayrılabilirdi.Böylece bir servis
+  çöktüğünde diğerleri çalışmaya devam ederdi.Ancak iki ayrı servisi çalıştırmak yerine
+  tek servisi tek dokunuşta çalıştırmak projeyi tamamlanana kadar daha pratik
+  bir yol olarak görülmüştür. 
+ 
+///////////////////////////////////////SONUÇ///////////////////////////////////////
+
+-Server 8005 portundan servise açılmıştır ve "http://localhost:8005/" adresinden
+ kullanıcıyı index sayfasına yönlendirir ve kullanıcı ilgili alana kendi id'sini girer
+ eğer kullanıcı kayıtlı ise username'i ve userid'si bir alt kısımda görülür onu
+ kendi board una yönlendirecek bir link de görünür.Link tıklandığında kullanıcı kendi
+ board'una bağlanmaktadır.
+
+-User kendine ait işleri statüsüyle birlikte görebilmekte ve güncelleyebilmektedir.
+ Yapılan her güncelleme database tablosunda saklanmaktadır.User Kanban Board'a ilaveten
+ eklenen bir başka form vasıtasıyla kendi ismini ve işlerini güncelleyebilmektedir.
+
+-Proje için Admin-User ayrımı yapılmamış herkes User olarak düşünülmüştür.Admin için
+ farklı sayfalar hazırlanmamıştır.
+
+///////////////////////////////////////SON//////////////////////////////////////
+
+
+
+
+
+
+
+
+
+  

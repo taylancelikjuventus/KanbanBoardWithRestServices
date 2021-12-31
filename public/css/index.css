@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+}
+
+table{
+    border-collapse: collapse;
+    padding :10px;
+    background: #444;
+    color:#eae3df;
+    min-width: 220px;
+}
+
+input[type=button]{
+    
+    color:white;
+    background: cadetblue;
+      border :0px;   
+}
+input[type=button]:hover{
+    
+    background: #60acd1;
+ 
+    
+}
+
+
+h3{
+    color: cadetblue;
+}
+h2{
+    color:#444;
+}
+
+table th,td{
+    padding:5px;
+    text-align: left;
+    border-bottom-color: 1px solid #444;
+}
+
+#userlistTable {
+    border-collapse: collapse;
+    padding :10px;
+}
+#userlistTable th,td{
+    padding:5px;
+    text-align: left;
+    border-bottom-color: 1px solid #444;
+}
+
+#userlistTable tr:hover{
+    background:#56b34a;
+}

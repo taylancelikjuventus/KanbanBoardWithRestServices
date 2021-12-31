@@ -1,0 +1,31 @@
+
+PostmanColletions: kanban_rest_api.postman_collecion.json dosyası Postman ile
+                   test edilen rest servislerin sonuçlarını göstermektedir.
+
+database : Projede kulanılan sql dosyası bulunmaktadır.MySQL kullanılmıştır
+
+express_modules : Proje node.js ve ile yapılmıştır projede kullanılan bütün
+                  moduller(npm ile indirilenler dahil) bu klasörde bulunmaktadırç
+
+components: List ve Cardların class'larını temsil ederler
+
+css : sayfalarda kullanılan css dosyaları bulunur     
+
+js:
+   apifunctions: Rest servisleri kullanmak için gerekli JS fonksiyonları burada
+                 implemente edilmiştir
+   
+   drag-drop :   Card'lar ve List'ler arası drag-drop yapılmasına olanak sağlar.
+
+views : bu klasörde sadece html sayfaları vardır ve tabiki kullanılan scriptler.
+
+   database.js : MySQLdatabase i için gerekli username ve password bulunmaktadır.
+                 Projeyi çalıştırmadan önce burdaki degerleri sizin MySQL 
+                 kullanıcı adı ve parola ile değiştirin.
+    
+    server.js : Server dosyası olarak yazılmıştır. 
+
+
+
+ 
+  

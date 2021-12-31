@@ -1,0 +1,209 @@
+* {
+    box-sizing: border-box;
+}
+
+
+.board{
+    display: flex;
+    flex-wrap: wrap;
+    border : 3px solid coral;
+    margin : 10px;
+    min-width: 80%;
+    border-radius: 5px;
+}
+
+.userDetails{
+    display: flex;
+    flex-direction: row;
+    margin : 10px;
+    min-width:80%;
+    border-radius: 5px;
+}
+
+.card{
+    height:auto;
+    padding: 5px;
+    word-wrap: true;
+    border : 1px solid #e9bac5;
+    margin:5px 5px 10px 10px;
+    background: #b54f6e;
+    color:#e9bac5;
+    border-radius: 5px;
+    margin-left: 4px;
+    text-align: left;
+    align-items: center;
+}
+
+
+.card div{
+    padding:0;
+    line-height: 5px;
+}
+
+.card li{
+    margin-bottom: 2px;
+}
+.card .deadline{
+    font-size: 12px;
+    font-style: italic;
+}
+
+.card .title{
+    font-size: 16px;
+    font-weight: bold;
+}
+.card button{
+    font-size: 12px;
+    background: #444;
+    color:cadetblue;
+    border: 0;
+    margin-left: 2px;
+
+}
+
+.card button:hover{
+    background: cadetblue;
+    color:#444;
+}
+
+
+
+#list1 ,#list2 , #list3,#list4{
+
+    flex :15%;
+    max-width: 100%;
+    min-height: 300px; 
+    border: 1px solid cadetblue;
+    border-radius: 5px;
+    padding:5px;
+    margin:5px;
+    overflow: auto;
+    list-style: none;
+    background: #444;
+
+}
+
+
+#list1 .card{
+    background: #d06b9c6;
+    color:#ffafbe;
+    
+}
+#list2 .card{
+    background: #3e6fe0;
+    color:#a8c2ff;
+    
+}
+#list3 .card{
+    background: #56b34a;
+    color:#99f38d;
+    
+}
+#list4 .card{
+    background: #ed7a52;
+    color:#f9ba9b;
+    
+}
+
+.listHeader{
+    flex:25%;
+    min-width: 192px;
+    border-radius: 5px;
+    text-align: center;
+    color: cadetblue;
+    background: #444;
+    padding: 5px 5px;
+    margin: 5px;
+    margin-bottom: 5px;
+}
+
+.userDetails{
+    margin: 10px;
+    background: #444;
+    color:white;
+}
+
+.addEditForm{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    background-color: #444;
+    color:#fc8c50;
+    border-radius: 5px;
+    min-width: 190px;
+
+}
+
+.addEditForm button{
+    background-color: darksalmon;
+    color:aliceblue;
+    padding:5px;
+    border: 2px solid #444;
+    flex:25%;
+}
+.addEditForm button:hover{
+    background-color: lightsalmon;
+}
+
+.addEditForm .row{
+    margin:10px;
+    flex-direction: row;
+    flex:100%;
+}
+
+.addEditForm input,textarea,select{
+    width:80%; 
+    min-width: 120px;
+    background: #eae3df;
+}
+
+
+.addEditForm .col{
+    flex-direction: column;
+    flex:100%;
+}
+
+.navbtns button{
+    background:#444;color:white;padding:5px;margin-left: 10px;
+}
+.navbtns button:hover{
+    background: #777;
+}
+
+/*@media only screen and (max-width: 900px) { */
+@media (max-width: 900px) {
+    .board{
+        flex-direction: row;
+    }
+    #list1,#list2,#list3,#list4, .listHeader{
+        flex: 25%;
+    }
+}
+
+
+@media (max-width: 678px) {
+    .board{
+        flex-direction: row;
+    }
+    #list1,#list2,#list3,#list4, .listHeader{
+        flex: 30%;
+    }
+
+
+}
+@media (max-width: 550px) {
+    .board{
+        flex-direction: column;
+    }
+    .list{
+        flex: 90%;
+    }
+
+    .addEditForm button{
+        flex-direction: column;
+        flex: 80%;
+    }
+
+
+}
+

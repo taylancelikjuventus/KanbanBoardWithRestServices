@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="kanban.css">
+
+    </head>
+    <body>
+
+        <!--userDetails shows user credientials-->
+        <div  class="userDetails">
+            <table border="0" cellspacing="1" cellpadding="5" style="border-collapse: collapse;color:whitesmoke;font-size: large;">
+                <tbody>
+                    <tr>
+                        <td>User ID </td>
+                        <td>:</td>
+                        <td id="userid"></td>
+                    </tr>
+                    <tr>
+                        <td>Username</td>
+                        <td>:</td>
+                        <td id="username"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <!---Form Fields to edit/delete/add  tasks-->
+        <div class="addEditForm" id="addEditForm">
+            <div class="row">
+                <h3 style="color:cadetblue;">Add/Edit Tasks</h3>        
+                <div class="col">
+                    <label for="deadline">Task Id</label>
+                </div>
+                <div class="col">
+                    <input type="text" id='taskid' name="taskid" />
+                </div>
+                <div class="col">
+                    <label for="taskname">Task Name</label>
+                </div>
+                <div class="col">
+                    <input type="text" id='taskname' name="taskname" placeholder="task name, *add,*edit" />
+                </div>
+                <div class="col">
+                    <label for="tasktext">Text Description</label>
+                </div>
+                <div class="col">
+                    <textarea  id='tasktext' rows="2" name="tasktext" placeholder="task description, *add,*edit"></textarea>
+                </div>
+                <div class="col">
+                    <label for="status">Task Status</label>
+                </div>
+                <div class="col">
+                    <select name='status' id="taskstatus">
+                        <option value="backlog">Backlog</option>
+                        <option value="todo">To do</option>
+                        <option value="inProgress">in Progress</option>
+                        <option value="done">Done</option>
+                    </select>
+
+                </div>
+                <div class="col">
+                    <label for="deadline">Deadline</label>
+                </div>
+                <div class="col">
+                    <input type="text" id='deadline' name="deadline" placeholder="deadline, *add,*edit" />
+                </div>
+                <div class="col">
+                    <label for="deadline">User Id </label>
+                </div>
+                <div class="col">
+                    <input type="text" id='uid' name="userid" placeholder="user id, *add,*edit" />
+                </div>
+
+                <div class="col">
+                    <div class="row" style="text-align: center;margin-left:-15%;">
+                        <button id="btn_add" type="button" onclick="addToTask()">Add</button>
+                        <button id="btn_edit" type="button" onclick="editTask()">Edit</button>
+                        <button id="btn_delete" type="button" onclick="deleteTask()" >Delete</button>
+                        <button type="button" onclick="ClearAllFields()" >Clear</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+       <!---End of Form Fields-->
+       
+       
+        <!-----Kanban Board Layout------>
+        <div class="board" id="board_id">
+            <div id='list1'>
+
+
+            </div>
+            <div id='list2'>
+
+
+            </div>
+            <div id='list3'>
+
+
+            </div>
+            <div id='list4'>
+
+
+            </div>
+
+        </div>  
+ 
+         <!--End of kanban board--->
+        
+         <!--Navigation buttons--->
+         <div class="navbtns">
+        <button type="button" onclick="showTasks()" >Refresh</button>
+        <button type="button" onclick="goBack()" >Back</button>
+        </div>
+
+         <!--Implemented drag drop handlers-->
+        <script src="./dragdrops.js"></script>
+          <!--scripts to retrieve data-->
+        <script src="apifunctions.js"></script>
+        <!--List Component-->
+        <script src="list.js"></script>
+        <!--Card Component-->
+        <script src="card.js"></script>
+        
+        <script>
+
+            window.onload = function () {
+
+                document.getElementById("userid").innerHTML += " <%= userid %>";
+                document.getElementById("username").innerHTML += " <%= username %>";
+
+
+             //event Listeners for Cards/
+                for (let i = 0; i < document.getElementsByClassName("card").length; i++) {
+                    // document.getElementsByClassName("card")[i].addEventListener("click", x);
+                }
+
+                ClearAllFields();
+                showTasks(); //updates Kanbas board
+            }
+
+
+             //shows updated tasks on Kanbas board
+            function showTasks() { //OK
+
+                const uid = "<%= userid %>";   
+
+                // api call
+                getTasksOfUser("http://localhost:8005/tasks/", uid).then(
+                        response => {
+
+                            let resp = JSON.stringify(response); //convert to json string
+                            let resobj = JSON.parse(resp);//convert to js object
+
+                            console.log(resobj); //arrayden tek JSOn dönderiyor
+
+                            const tasks = resobj;
+
+                            //create empty arrays for cards 
+                            var backlog = [];
+                            var inProgress = [];
+                            var todo = [];
+                            var done = [];
+
+                            for (var i = 0; i < tasks.length; i++) {
+
+                                //fill first list
+                                if (tasks[i].taskstatus == "backlog") {
+                                    //backlog.push(new card(tasks[i].taskid, tasks[i].taskname));
+                                    backlog.push(new card(tasks[i].taskid, tasks[i].taskname, tasks[i].tasktext, tasks[i].deadline));
+                                }
+                                //fill 2. list
+                                if (tasks[i].taskstatus == "todo") {
+                                    todo.push(new card(tasks[i].taskid, tasks[i].taskname, tasks[i].tasktext, tasks[i].deadline));
+
+
+                                }
+                                //fill 3. list
+                                if (tasks[i].taskstatus == "inProgress") {
+                                    inProgress.push(new card(tasks[i].taskid, tasks[i].taskname, tasks[i].tasktext, tasks[i].deadline));
+
+                                }
+                                //fill 4. list
+                                if (tasks[i].taskstatus == "done") {
+                                    done.push(new card(tasks[i].taskid, tasks[i].taskname, tasks[i].tasktext, tasks[i].deadline));
+
+                                }
+
+
+                            }
+
+                            //create lists
+                            const backlogList = new list("list1", "backlog", backlog);
+                            const todoList = new list("list2", "todo", todo);
+                            const inProgressList = new list("list3", "in Progress", inProgress);
+                            const doneList = new list("list4", "done", done);
+
+                            //render Lists 
+                            var backlog = document.getElementById("list1");
+                            var todo = document.getElementById("list2");
+                            var progress = document.getElementById("list3");
+                            var done = document.getElementById("list4");
+
+                            backlog.innerHTML = backlogList.render();
+                            todo.innerHTML = todoList.render();
+                            progress.innerHTML = inProgressList.render();
+                            done.innerHTML = doneList.render();
+
+
+                        }
+
+
+                ).catch();
+
+            }
+         
+
+///Following sections are for CRUD operations on Tasks Table of Database //////////////////////////////////////////////////
+
+///section1///////////////////////ADD NEW TASK///////////////////////
+
+            //arrange form fields
+            function add_new_card(obj) {
+                
+                 //add fields to Form
+                document.getElementById("taskid").value = obj.getAttribute("data-id");
+                document.getElementById("taskname").value = obj.getAttribute("data-title")
+                document.getElementById("tasktext").value = obj.getAttribute("data-text");
+                document.getElementById("deadline").value = obj.getAttribute("data-deadline");
+                document.getElementById("uid").value = document.getElementById("userid").innerHTML;
+                 
+                //this is Auto incremented field 
+                document.getElementById("taskid").setAttribute("disabled", "disabled");
+                document.getElementById("uid").setAttribute("disabled", "disabled");
+
+                const taskstatus = document.getElementById("taskstatus").value;
+
+                    
+                document.getElementById("btn_edit").setAttribute("disabled","disabled");     
+                document.getElementById("btn_delete").setAttribute("disabled","disabled");     
+                    
+                //set focus on form
+                document.getElementById("addEditForm").focus();
+            }
+
+            //call rest api for adding new task
+            function addToTask() {
+
+
+                const taskname = document.getElementById("taskname").value;
+                const tasktext = document.getElementById("tasktext").value;
+                const taskstatus = document.getElementById("taskstatus").value;
+                const deadline = document.getElementById("deadline").value;
+                const userid = document.getElementById("uid").value;
+
+                if (taskname && tasktext && taskstatus && deadline && userid) {
+                  
+                  //api call
+                  addNewTask("http://localhost:8005/tasks/add/"
+                  ,taskname,tasktext,taskstatus,deadline,userid)
+                          .then(
+                            data => alert(data.msg)
+                    ).catch(
+                            err => console.log(err)
+                    )
+                  
+
+
+
+                   ClearAllFields();
+                   showTasks();
+                } else {
+
+                    alert("Fill required fields !");
+                }
+
+
+            }
+
+////////////////////////END OF ADD NEW TASK//////////////////////////
+
+/////section 2////////////////////EDIT TASK////////OK/////////////////////////           
+            //arrange form fields for editing
+            function edit_card(obj) {
+
+                //add fields to Form
+                document.getElementById("taskid").value = obj.getAttribute("data-id");
+                document.getElementById("taskname").value = obj.getAttribute("data-title")
+                document.getElementById("tasktext").value = obj.getAttribute("data-text");
+                document.getElementById("deadline").value = obj.getAttribute("data-deadline");
+                document.getElementById("uid").value = document.getElementById("userid").innerHTML;
+
+                document.getElementById("taskid").setAttribute("disabled", "disabled");
+
+                const taskstatus = document.getElementById("taskstatus").value;
+
+                 document.getElementById("btn_add").setAttribute("disabled","disabled");     
+                document.getElementById("btn_delete").setAttribute("disabled","disabled");     
+                    
+                //set focus on form
+                document.getElementById("addEditForm").focus();
+
+
+            }
+
+            //call rest api service
+            function editTask() {
+
+                const taskid = document.getElementById("taskid").value;
+                const taskname = document.getElementById("taskname").value;
+                const tasktext = document.getElementById("tasktext").value;
+                const taskstatus = document.getElementById("taskstatus").value;
+                const deadline = document.getElementById("deadline").value;
+                const userid = document.getElementById("uid").value;
+
+                if (taskid && taskname && tasktext && taskstatus && deadline && userid) {
+
+                   //api call
+                    editTaskById("http://localhost:8005/tasks/update/",
+                            taskid,
+                            taskname,
+                            tasktext,
+                            taskstatus,
+                            deadline,
+                            userid
+                            ).then(
+                            data => alert(data.msg)
+                    ).catch(
+                            err => console.log(err)
+                    )
+
+                    ClearAllFields();
+                    showTasks();
+
+                } else {
+
+                    alert("please provide all required fields !");
+                }
+
+
+
+            }
+
+////////////////////////END OF EDIT TASK/////////////////////
+
+
+////section 3///////////////////DELETE TASK/////////////////OK//////////////////
+
+            //arrange input fields
+            function delete_card(obj) {
+
+                //add fields to Form
+                document.getElementById("taskid").value = obj.getAttribute("data-id");
+                document.getElementById("taskname").value = obj.getAttribute("data-title")
+                document.getElementById("tasktext").value = obj.getAttribute("data-text");
+                document.getElementById("deadline").value = obj.getAttribute("data-deadline");
+                document.getElementById("uid").value = document.getElementById("userid").innerHTML;
+
+                document.getElementById("taskid").setAttribute("disabled", "disabled");
+                document.getElementById("taskname").setAttribute("disabled", "disabled");
+                document.getElementById("tasktext").setAttribute("disabled", "disabled");
+                document.getElementById("deadline").setAttribute("disabled", "disabled");
+                document.getElementById("uid").setAttribute("disabled", "disabled");
+                document.getElementById("taskstatus").setAttribute("disabled", "disabled");
+
+
+                document.getElementById("btn_edit").setAttribute("disabled","disabled");     
+                document.getElementById("btn_add").setAttribute("disabled","disabled");     
+                    
+                //set focus on form
+                document.getElementById("addEditForm").focus();
+
+
+            }
+
+            //call rest api  
+            function deleteTask() {
+
+                //get taskid from double click and paste it to
+                //taskid value of form.
+                const taskid = document.getElementById("taskid").value;
+                if (taskid) {
+
+                    //api call
+                    deleteFromTask("http://localhost:8005/tasks/delete/", taskid)
+                            .then().then(
+                            data => {
+                                alert(data.msg)
+                            }
+                    ).catch(
+                            err => console.log(err)
+                    );
+
+                    ClearAllFields();
+                    showTasks(); //update kanbas board
+                } else {
+                    alert("no id selected...");
+                }
+
+
+            }
+////////////////////////END OF DELETE TASK/////////////////////
+
+///////////////////OTHER functios//////////////////////
+//        
+           //back button
+            function goBack() {
+
+                window.location.href = "/";
+            }
+
+            //clear Form fields
+            function ClearAllFields() {
+
+                const taskid = document.getElementById("taskid");
+                taskid.setAttribute("disabled","disabled");
+                taskid.value = "";
+                const taskname = document.getElementById("taskname");
+                taskname.removeAttribute("disabled");
+                taskname.value = "";
+                const taskstatus = document.getElementById("taskstatus");
+                taskstatus.removeAttribute("disabled");
+                taskstatus.value = "";
+                const tasktext = document.getElementById("tasktext");
+                tasktext.removeAttribute("disabled");
+                tasktext.value = "";
+                const deadline = document.getElementById("deadline");
+                deadline.removeAttribute("disabled");
+                deadline.value = "";
+                const uid = document.getElementById("uid");
+                uid.removeAttribute("disabled");
+                uid.value = "";
+
+                document.getElementById("btn_add").removeAttribute("disabled"); 
+                document.getElementById("btn_edit").removeAttribute("disabled"); 
+                document.getElementById("btn_delete").removeAttribute("disabled"); 
+
+
+            }
+
+
+
+
+        </script>    
+
+
+
+
+    </body>
+</html>

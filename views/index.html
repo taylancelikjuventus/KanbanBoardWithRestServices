@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Homepage</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="index.css" >
+    </head>
+    <body>
+        
+        <h2>ADD/EDIT Users</h2>
+        <hr>
+        <h3>Please enter your user id and click 'Check' button</h3>
+
+        <div class="userCheck">
+
+            <table  >
+                <tr>
+                    <td> <input placeholder="enter user id" id="userid" name ="id" onkeyup="clearError()"/></td>
+                    <td> <input type="button" value="Check" onclick="getUser2()" /></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <hr>
+        <div class="userLink">
+            <p id="demo"></p>
+            <div id="linkToKanban"></div>
+        </div>
+
+
+        <div class="userForm">
+
+            <h3>Add New User</h3>
+            <form id="adduser" method="POST" >
+
+                <table >
+                    <tr>
+                       
+                        <td>     <input placeholder="username" type="text" name="username" id="uname"/></td>
+                        <td>     <input type="button" value="Save" onclick="addNewUser()"/>  </td>
+                    </tr>
+                    <tr>
+                    <p style="color:blue;" id="msg"></p>            
+                    </tr>
+
+                </table>
+
+            </form>
+        </div>
+
+        <div class="deleteForm">
+
+            <h3>Delete User</h3>
+            <form id="deleteuser" method="POST" >
+
+                <table >
+                    <tr>
+                      
+                        <td>  <input placeholder="user id" type="text" name="userid" id="userid"/> </td>
+                        <td>  <input type="button" value="Delete" onclick="delete_User()"/></td>
+                    </tr>
+                    <tr>
+                    <p style="color:blue;" id="msg"></p>            
+                    </tr>
+
+                </table>
+
+            </form>
+        </div>
+
+        
+
+        <div class="editForm">
+
+            <h3>Edit User</h3>
+            <form id="edituser" method="POST" >
+
+                <table >
+                    <tr>
+                      
+                        <td>   <input placeholder="user id" type="text" name="userid" id="userid"/><br> </td>
+                    </tr>
+
+                    <tr>
+                        <td>  <input placeholder="user id" type="text" name="username" id="username"/><br>  </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <td>   <input type="button" value="Edit" onclick="edit_User()"/> </td>
+                    </tr>  
+                    <tr>
+                    <p style="color:blue;" id="msg"></p>
+
+                    </tr>
+
+                </table>
+
+            </form>
+        </div>
+
+        <hr>
+
+        <h3>Users List</h3>
+        <table id="userlistTable" >
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+            </tr>
+            <tbody id="table_data" >
+
+            </tbody>
+        </table>
+
+
+        <hr>
+
+        <h3>Last Visited Pages...</h3>
+        <div id="lastVisiteds">
+
+
+        </div>       
+
+
+        <script src="apifunctions.js"></script>
+        <script>
+                            //store last visiteds
+                            localStorage.setItem("visiteds", JSON.stringify([]));
+
+////////////////////////////////CRUD OPERATIONS////////////////////////////////
+
+                            function getUser2() {
+
+                                const userid = document.getElementById("userid").value;
+//                 alert(userid); //2
+
+                                //use api_functionslike this
+                                //calling async function
+                                getUser("http://localhost:8005/users/", userid).then(
+                                        response => {
+
+                                            let resp = JSON.stringify(response); //convert to json string
+                                            let resobj = JSON.parse(resp);//convert to js object
+
+                                            const username = resobj[0]["username"];
+                                            document.getElementById("demo").innerHTML = "Welcome, " + username;
+                                            document.getElementById("linkToKanban").innerHTML = "<a href='/kanban?userid=" + userid + "&username=" + username + "' >Go to your board</a><hr>";
+
+                                            var str = "";
+                                            for (var i = 0; i < resobj.length; i++) {
+
+                                                str += "<tr>"
+                                                        + "<td>" + resobj[i]["userid"] + "</td>"
+                                                        + "<td>" + resobj[i]["username"] + "</td>"
+                                                        + "</tr>";
+                                            }
+
+                                            //last visited pages
+                                            //We store both url addresses and date they are visited
+                                            var hrefs = JSON.parse(localStorage.getItem("visiteds"));
+                                            var date = new Date(Date.now()).toLocaleString();
+                                            hrefs.push([{'page': 'http://localhost:8005/users/' + userid}, {'date': date}]);
+                                            localStorage.setItem("visiteds", JSON.stringify(hrefs));
+
+                                            console.log(hrefs);
+
+                                            //add to las visiteds
+                                            var str = "<ul>";
+                                            for (var i = 0; i < hrefs.length; i++)
+                                                //we show visited pages on the index page  
+                                                str += "<li><a href='" + hrefs[i][0].page + "'>" + hrefs[i][0].page + "</a></li><span>" + hrefs[i][1].date + "</span>";
+
+                                            str += "</ul>";
+
+                                            document.getElementById("lastVisiteds").innerHTML = str;
+
+                                        }
+                                ).catch(
+                                        err => {
+                                            document.getElementById("demo").innerHTML = "no such an user";
+                                            console.log(err);
+                                        }
+
+
+                                );
+
+                            }
+
+                            //add new user
+                            function addNewUser() {
+
+                                const elem = document.getElementById("adduser").username;
+                                var username = elem.value;
+                                addUser("http://localhost:8005/users/add/", username)
+                                        .then(
+
+                                                ).then(
+                                        data => {
+                                            alert(data.msg);
+
+                                        }
+                                ).catch(
+                                        err => console.log(err)
+                                );
+
+                                elem.value = ""; //clear input field
+                                getAll_Users(); //refresh table
+                            }
+
+
+                            getAll_Users();
+
+                            //get all users
+                            function getAll_Users() {
+
+                                //use api_functionslike this
+                                //calling async function
+                                getAllUsers("http://localhost:8005/users/").then(
+                                        response => {
+
+                                            let resp = JSON.stringify(response); //convert to json string
+                                            let resobj = JSON.parse(resp);//convert to js object
+
+                                            console.log(resobj);
+
+
+                                            var str = "";
+                                            for (var i = 0; i < resobj.length; i++) {
+
+                                                str += "<tr>"
+                                                        + "<td>" + resobj[i]["userid"] + "</td>"
+                                                        + "<td>" + resobj[i]["username"] + "</td>"
+                                                        + "</tr>";
+                                            }
+
+                                            document.getElementById("table_data").innerHTML = str;
+
+                                        }
+                                ).catch(
+                                        err => {
+                                            document.getElementById("demo").innerHTML = "no such an user";
+                                            console.log(err);
+                                        }
+
+                                );
+
+                            }
+
+                            function delete_User() {
+
+                                var userid = document.getElementById("deleteuser").userid.value;
+                                deleteUser("http://localhost:8005/users/delete", userid)
+                                        .then(
+
+                                                ).then(
+                                        data => {
+                                            alert(data.msg)
+                                        }
+                                ).catch(
+                                        err => console.log(err)
+                                );
+
+                                document.getElementById("deleteuser").userid.value = "";
+                                getAll_Users();
+                            }
+
+                            //updates user
+                            function edit_User() {
+
+                                const userid = document.getElementById("edituser").userid.value;
+                                const username = document.getElementById("edituser").username.value;
+
+                                editUser("http://localhost:8005/users/update/", userid, username)
+                                        .then(
+
+                                                ).then(
+                                        data => {
+                                            alert(data.msg)
+                                        }
+                                ).catch(
+                                        err => console.log(err)
+                                );
+
+                                document.getElementById("edituser").userid.value = "";
+                                document.getElementById("edituser").username.value = "";
+                                getAll_Users();
+
+
+
+                            }
+
+                            /////////////////////////////OTHERFunctions//////////////////////////
+                            function clearError() {
+
+                                const val = document.getElementById("userid").value;
+                                if (val == "")
+                                    document.getElementById("demo").innerHTML = "";
+                            }
+
+        </script>
+
+    </body>
+</html>

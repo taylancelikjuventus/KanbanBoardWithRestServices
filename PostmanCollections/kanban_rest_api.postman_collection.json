@@ -1,0 +1,1144 @@
+{
+	"variables": [],
+	"info": {
+		"name": "kanbas_rest_api",
+		"_postman_id": "767ff165-3485-b5fc-6820-46d310f3f7a0",
+		"description": "This collection shows api calls for crud operations.\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8005/users/add",
+			"request": {
+				"url": "localhost:8005/users/add",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n     {\n        \"username\":\"Biff Tannen\"\n      \n    }"
+				},
+				"description": "Adds new user"
+			},
+			"response": [
+				{
+					"id": "9b48783d-4725-4c22-9cd0-63bbbf7a7f5e",
+					"name": "localhost:8005/users/add",
+					"originalRequest": {
+						"url": "localhost:8005/users/add",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n     {\n        \"username\":\"Marlon Brando\"\n      \n    }"
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "25",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 30 Dec 2021 03:57:10 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "etag",
+							"key": "etag",
+							"value": "W/\"19-m8WIM3yJzNrN6z6owTiDEXgiFIc\"",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"description": "Custom header"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "Express",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"responseTime": 557,
+					"body": "{\"msg\":\"user created...\"}"
+				}
+			]
+		},
+		{
+			"name": "localhost:8005/users/",
+			"request": {
+				"url": "localhost:8005/users/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\":\"Tarzan\"\n}"
+				},
+				"description": "gets all users"
+			},
+			"response": [
+				{
+					"id": "72f9ea42-020f-4405-9485-f6c242684e80",
+					"name": "localhost:8005/users/",
+					"originalRequest": {
+						"url": "localhost:8005/users/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\":\"Tarzan\"\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "102",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Wed, 29 Dec 2021 20:33:06 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "etag",
+							"key": "etag",
+							"value": "W/\"66-iK4Eug8SmTQ73I/xVI9YkONwTxQ\"",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"description": "Custom header"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "Express",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"responseTime": 112,
+					"body": "[{\"userid\":2,\"username\":\"John Doe\"},{\"userid\":4,\"username\":\"Tarzan\"},{\"userid\":6,\"username\":\"Batman\"}]"
+				}
+			]
+		},
+		{
+			"name": "localhost:8005/users/1",
+			"request": {
+				"url": "localhost:8005/users/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\":\"Tarzan\"\n}"
+				},
+				"description": "gets one user with given id"
+			},
+			"response": [
+				{
+					"id": "d7f147bc-329e-4f3d-8b2e-c0cfe071be71",
+					"name": "localhost:8005/users/1",
+					"originalRequest": {
+						"url": "localhost:8005/users/2",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\":\"Tarzan\"\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "36",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Wed, 29 Dec 2021 20:34:34 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "etag",
+							"key": "etag",
+							"value": "W/\"24-m2dMUUKN8l8LJ31N3Infor9z0s4\"",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"description": "Custom header"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "Express",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"responseTime": 52,
+					"body": "[{\"userid\":2,\"username\":\"John Doe\"}]"
+				}
+			]
+		},
+		{
+			"name": "localhost:8005/tasks",
+			"request": {
+				"url": "localhost:8005/tasks",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\":\"Tarzan\"\n}"
+				},
+				"description": "gets all tasks"
+			},
+			"response": [
+				{
+					"id": "0a44791c-4f14-4b1d-80eb-8572766904f0",
+					"name": "localhost:8005/tasks",
+					"originalRequest": {
+						"url": "localhost:8005/tasks",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\":\"Tarzan\"\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "777",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Wed, 29 Dec 2021 20:35:01 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "etag",
+							"key": "etag",
+							"value": "W/\"309-VjIaiLWgYX5sECRtXoMVHLsgeoM\"",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"description": "Custom header"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "Express",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"responseTime": 58,
+					"body": "[{\"taskid\":1,\"taskname\":\"JobTitle\",\"tasktext\":\"JobText\",\"taskstatus\":\"backlog\",\"deadline\":\"2023-06-15\",\"timeadded\":\"2021-12-27T12:39:47.000Z\",\"userid\":1},{\"taskid\":2,\"taskname\":\"TaskTitle\",\"tasktext\":\"TaskText\",\"taskstatus\":\"todo\",\"deadline\":\"2023-06-15\",\"timeadded\":\"2021-12-27T12:41:10.000Z\",\"userid\":1},{\"taskid\":7,\"taskname\":\"random task\",\"tasktext\":\"sadafa\",\"taskstatus\":\"todo\",\"deadline\":\"21-05-2155\",\"timeadded\":\"2021-12-28T19:51:11.000Z\",\"userid\":2},{\"taskid\":11,\"taskname\":\"TaskName0\",\"tasktext\":\"TaskTitle\",\"taskstatus\":\"backlog\",\"deadline\":\"2023-01-15\",\"timeadded\":\"2021-12-27T12:42:49.000Z\",\"userid\":2},{\"taskid\":12,\"taskname\":\"Task B\",\"tasktext\":\"some text is here\",\"taskstatus\":\"backlog\",\"deadline\":\"12-05-2025\",\"timeadded\":\"2021-12-28T19:51:59.000Z\",\"userid\":2}]"
+				}
+			]
+		},
+		{
+			"name": "localhost:8005/tasks/:id",
+			"request": {
+				"url": "localhost:8005/tasks/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\":\"Tarzan\"\n}"
+				},
+				"description": "gets all tasks related to one user with given id"
+			},
+			"response": [
+				{
+					"id": "f7d80f09-7700-41e2-bee5-09af9c9dc6e2",
+					"name": "localhost:8005/tasks/:id",
+					"originalRequest": {
+						"url": "localhost:8005/tasks/1",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\":\"Tarzan\"\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "306",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Wed, 29 Dec 2021 20:35:21 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "etag",
+							"key": "etag",
+							"value": "W/\"132-ZdSpUOp5ngeUA62z3Hy0Wt6wxqE\"",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"description": "Custom header"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "Express",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"responseTime": 63,
+					"body": "[{\"taskid\":1,\"taskname\":\"JobTitle\",\"tasktext\":\"JobText\",\"taskstatus\":\"backlog\",\"deadline\":\"2023-06-15\",\"timeadded\":\"2021-12-27T12:39:47.000Z\",\"userid\":1},{\"taskid\":2,\"taskname\":\"TaskTitle\",\"tasktext\":\"TaskText\",\"taskstatus\":\"todo\",\"deadline\":\"2023-06-15\",\"timeadded\":\"2021-12-27T12:41:10.000Z\",\"userid\":1}]"
+				}
+			]
+		},
+		{
+			"name": "localhost:8005/tasks/add",
+			"request": {
+				"url": "localhost:8005/tasks/add",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n     {\n        \"taskname\": \"JobTitle\",\n        \"tasktext\": \"JobText\",\n        \"taskstatus\": \"backlog\",\n        \"deadline\": \"2023-06-15\",\n        \"userid\": 1\n    }"
+				},
+				"description": "Adds new task"
+			},
+			"response": [
+				{
+					"id": "4b7c02a0-136c-4d28-90bb-1c5815408e8f",
+					"name": "localhost:8005/tasks/add",
+					"originalRequest": {
+						"url": "localhost:8005/tasks/add",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n     {\n        \"taskname\": \"Task Title7\",\n        \"tasktext\": \"Task Text7\",\n        \"taskstatus\": \"backlog\",\n        \"deadline\": \"2023-06-15\",\n        \"userid\": 7\n    }"
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "25",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 30 Dec 2021 04:01:26 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "etag",
+							"key": "etag",
+							"value": "W/\"19-POB20m2TbUNwpU8rxloRcWbho7w\"",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"description": "Custom header"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "Express",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"responseTime": 82,
+					"body": "{\"msg\":\"task created...\"}"
+				}
+			]
+		},
+		{
+			"name": "localhost:8005/users/update",
+			"request": {
+				"url": "localhost:8005/users/update",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n     {\n     \t\"userid\" : 1,\n     \t\"username\":\"Mike Tyson\"\n     \n    }"
+				},
+				"description": "updates user.Example usage:\n\n{\n\t\"userid\":1,\n\t\"username\":\"John Doe\"\n}\n\n"
+			},
+			"response": [
+				{
+					"id": "e330326c-b6f9-45da-9511-77d6e2a6cba3",
+					"name": "localhost:8005/users/update",
+					"originalRequest": {
+						"url": "localhost:8005/users/update",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n     {\n     \t\"userid\" : 4,\n     \t\"username\":\"Bud Spencer\"\n     \n    }"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "25",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 30 Dec 2021 04:04:54 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "etag",
+							"key": "etag",
+							"value": "W/\"19-NW8UoCil34kOQCy3O88hQnGHwfk\"",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"description": "Custom header"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "Express",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"responseTime": 56,
+					"body": "{\"msg\":\"user updated...\"}"
+				}
+			]
+		},
+		{
+			"name": "localhost:8005/users/delete",
+			"request": {
+				"url": "http://localhost:8005/tasks/status/update/3",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n     {\n     \t\"newtaskstatus\" : \"todo\"\n     \n     \n    }"
+				},
+				"description": "updates user.Example usage:\n\n{\n\t\"userid\":1,\n\t\"username\":\"John Doe\"\n}\n\n"
+			},
+			"response": [
+				{
+					"id": "909c707c-b366-4929-94f4-cec0ddf1ebb6",
+					"name": "localhost:8005/users/delete",
+					"originalRequest": {
+						"url": "http://localhost:8005/tasks/status/update/2",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n     {\n     \t\"newtaskstatus\" : \"inProgress\"\n     \n     \n    }"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "31",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 30 Dec 2021 04:19:04 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "etag",
+							"key": "etag",
+							"value": "W/\"1f-kASpd05LKX9+Fr2PzZC3JaE2x0U\"",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"description": "Custom header"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "Express",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"responseTime": 109,
+					"body": "{\"msg\":\"taskstatus updated...\"}"
+				}
+			]
+		},
+		{
+			"name": "localhost:8005/tasks/status/update/:id",
+			"request": {
+				"url": "http://localhost:8005/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n     {\n     \t\"newtaskstatus\" : \"done\"\n     \n     \n    }"
+				},
+				"description": "updates task status of task.Example usage:\n\n{\n\"newtaskstatus\" : \"inProgress\"\n}\n\n"
+			},
+			"response": [
+				{
+					"id": "278cca1d-e437-4ba6-b6b2-bd120bb4fc33",
+					"name": "localhost:8005/tasks/status/update/:id",
+					"originalRequest": {
+						"url": "http://localhost:8005/tasks/status/update/14",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n     {\n     \t\"newtaskstatus\" : \"done\"\n     \n     \n    }"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "31",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 30 Dec 2021 04:21:40 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "etag",
+							"key": "etag",
+							"value": "W/\"1f-kASpd05LKX9+Fr2PzZC3JaE2x0U\"",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"description": "Custom header"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "Express",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"responseTime": 65,
+					"body": "{\"msg\":\"taskstatus updated...\"}"
+				}
+			]
+		},
+		{
+			"name": "localhost:8005/kanban",
+			"request": {
+				"url": "http://localhost:8005/users/add",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n     {\n     \t\"username\":\"Brock Lesnar\"\n     \n     \n    }"
+				},
+				"description": "loads kanban page with data of user\n\n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8005/tasks/update/2",
+			"request": {
+				"url": "localhost:8005/tasks/update/2",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n  {\n       \n        \"taskname\": \"JobTitle\",\n        \"tasktext\": \"JobText\",\n        \"taskstatus\": \"done\",\n        \"deadline\": \"2023-06-15\",\n        \"timeadded\": \"2021-12-27T12:39:47.000Z\",\n        \"userid\": 7\n    }"
+				},
+				"description": "updates tasks according to their id\n\n\n"
+			},
+			"response": [
+				{
+					"id": "abda14ed-975f-4012-8777-a0a3fd284af4",
+					"name": "localhost:8005/tasks/update/2",
+					"originalRequest": {
+						"url": "localhost:8005/tasks/update/2",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n  {\n       \n        \"taskname\": \"JobTitle\",\n        \"tasktext\": \"JobText\",\n        \"taskstatus\": \"done\",\n        \"deadline\": \"2023-06-15\",\n        \"timeadded\": \"2021-12-27T12:39:47.000Z\",\n        \"userid\": 7\n    }"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "25",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 30 Dec 2021 04:26:53 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "etag",
+							"key": "etag",
+							"value": "W/\"19-xwRikJuJ731uj5aLVAJWOjc2q0I\"",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"description": "Custom header"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "Express",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"responseTime": 69,
+					"body": "{\"msg\":\"task updated...\"}"
+				}
+			]
+		},
+		{
+			"name": "localhost:8005/tasks/status/update/:id",
+			"request": {
+				"url": "http://localhost:8005/tasks/status/update/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n     {\n       \"newtaskstatus\":\"backlog\"\n    }"
+				},
+				"description": "just updates taskstatus column of task with given id\nExample :\n\nRequest:\nlocalhost:8005//tasks/status/update/1\n\nBody (in JSON)\n{\"newtaskstatus\":\"done\"}\n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8005/tasks/delete",
+			"request": {
+				"url": "http://localhost:8005/tasks/delete",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n     {\n       \"taskid\":7\n    }"
+				},
+				"description": "deletes task with given id from req. body\n\n{\n\t\n\t\"taskid\":4\n}\n\n"
+			},
+			"response": [
+				{
+					"id": "05940f16-fda2-4e24-a091-b2a8c715936d",
+					"name": "localhost:8005/tasks/delete",
+					"originalRequest": {
+						"url": "http://localhost:8005/tasks/delete",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n     {\n       \"taskid\":7\n    }"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "25",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 30 Dec 2021 04:28:18 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "etag",
+							"key": "etag",
+							"value": "W/\"19-z6iH2BYNt2lSmzPoIUrh8heE38c\"",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"description": "Custom header"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "Express",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"responseTime": 69,
+					"body": "{\"msg\":\"task deleted...\"}"
+				}
+			]
+		},
+		{
+			"name": "localhost:8005/users/delete",
+			"request": {
+				"url": "localhost:8005/users/delete",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n\t\"userid\":6\n}"
+				},
+				"description": "deletes user with given id from request's body in JSON\nformat"
+			},
+			"response": [
+				{
+					"id": "aff6e900-1a6e-4148-b5ee-eadd0cd470f4",
+					"name": "localhost:8005/users/delete",
+					"originalRequest": {
+						"url": "localhost:8005/users/delete",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n\t\"userid\":6\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "25",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Wed, 29 Dec 2021 20:37:10 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "etag",
+							"key": "etag",
+							"value": "W/\"19-TGIkwCifalw/FXy+EpflGLBAoVM\"",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"description": "Custom header"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "Express",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"responseTime": 100,
+					"body": "{\"msg\":\"user deleted...\"}"
+				}
+			]
+		}
+	]
+}

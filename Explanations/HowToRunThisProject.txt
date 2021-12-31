@@ -1,0 +1,39 @@
+
+How to Run Kanban Board Project:
+
+Database Program: MySQL
+Backend :Node.js and Express.js,REST API
+Frontend:HTML/CSS/JS
+OS:Windows10
+Browser : Mozilla Firefox
+node.js version: v14.17.3
+IDE :Netbeans 8.2
+
+
+1.You need to install node.js.
+2.Create database named "kanban_db"and import "kanban_db.sql"file inside project folder.
+3.Open "database.js" file in Project folder and change username and password.If your 
+  username and passwordare different.
+
+4.run server.js program with node.exe file.If it runs correctly you will get a
+  message on your console.
+
+5.While server.js is running go to index page and you will see all users registered in
+  the table there.That rows comes from "kanban_db" database.
+
+  Just type 2 for userid=2 and click "Check" button if user exits you will se following two   lines:
+
+  Welcome, Brock Lesnar
+  Go to your board         (this is link,click this to go to KanbanBoard)
+
+  Click link and visit Kanban Board of user with userid=2.
+
+6.You can update users in index.html page and update tasks in KanbanBoard page.
+
+7.All Apis are tested and working fine and Postman Collections provided in project folder.
+
+8.All Express.js dependencies/modules are provided in express_modules folder.
+
+Thanks for reading.
+
+
